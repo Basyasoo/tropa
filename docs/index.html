@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тропа: приложение для быстрого и приватного соединения</title>
+<meta name="description" content="Тропа подключается по вашей подписке и работает на ядре Xray. Скачайте приложение для Android.">
+<link rel="icon" href="logo.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="bar">
+  <a class="logo" href="./"><img src="logo.png" alt="" width="30" height="30">Тропа</a>
+  <nav aria-label="Разделы">
+    <a href="#features">Возможности</a>
+    <a href="#protocols">Протоколы</a>
+    <a href="#get">Устройства</a>
+    <a href="feedback.html">Обратная связь</a>
+  </nav>
+  <a class="btn sm" href="#get">Скачать</a>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>Тропа</h1>
+    <p>Приложение для быстрого и приватного соединения по вашей подписке.</p>
+    <div class="cta">
+      <a class="btn" href="https://github.com/Basyasoo/tropa/releases/latest/download/Tropa.apk">Скачать для Android</a>
+      <a class="btn ghost" href="#features">Возможности</a>
+    </div>
+    <canvas class="globe" id="globe" aria-label="Вращающийся глобус из точек" role="img"></canvas>
+  </section>
+
+  <section class="block" id="features">
+    <div class="wrap">
+      <h2>Всё важное в одном приложении</h2>
+      <div class="bento">
+        <article class="tile wide">
+          <h3>Подписки</h3>
+          <p>Добавьте ссылку, QR-код или откройте кнопку импорта от своего сервиса. Срок и остаток трафика видны прямо в списке.</p>
+          <ul class="tags"><li>tropa://</li><li>happ://</li><li>incy://</li><li>v2rayng://</li><li>clash://</li><li>sing-box://</li></ul>
+        </article>
+        <article class="tile wide">
+          <h3>Маршрутизация</h3>
+          <p>Решайте, что идёт через соединение, а что напрямую: по сайтам, адресам и приложениям.</p>
+          <ul class="tags"><li>GeoIP</li><li>GeoSite</li><li>По приложениям</li><li>Профили из подписки</li></ul>
+        </article>
+        <article class="tile">
+          <h3>Своё ядро</h3>
+          <p>TropaCore работает внутри приложения на основе Xray-core и обновляется вместе с ним.</p>
+        </article>
+        <article class="tile">
+          <h3>Точная настройка</h3>
+          <p>MTU, DNS, Mux, сниффинг и фрагментация там, где они нужны.</p>
+        </article>
+        <article class="tile">
+          <h3>Обновления</h3>
+          <p>Приложение само находит новую версию и скачивает её при входе.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="protocols">
+    <div class="wrap">
+      <h2>Протоколы</h2>
+      <div class="protos">
+        <div class="proto"><b>VLESS</b><span>REALITY, XTLS</span></div>
+        <div class="proto"><b>VMess</b><span>WebSocket, gRPC</span></div>
+        <div class="proto"><b>Trojan</b><span>TLS</span></div>
+        <div class="proto"><b>Shadowsocks</b><span>AEAD</span></div>
+        <div class="proto"><b>Hysteria2</b><span>QUIC</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="get">
+    <div class="wrap">
+      <h2>Устройства</h2>
+      <div class="get">
+        <article class="tile main">
+          <h3>Android</h3>
+          <p>APK для arm64, версия <span id="ver">из последнего релиза</span>.</p>
+          <a class="btn" href="https://github.com/Basyasoo/tropa/releases/latest/download/Tropa.apk">Скачать APK</a>
+        </article>
+        <article class="tile">
+          <h3>Windows и iOS</h3>
+          <p>В работе. Следите за релизами на GitHub.</p>
+          <a class="btn ghost sm" style="justify-self:start" href="https://github.com/Basyasoo/tropa/releases">Релизы</a>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="wrap">
+  <footer class="foot">
+    <span>Тропа</span>
+    <nav aria-label="Ссылки">
+      <a href="feedback.html">Обратная связь</a>
+      <a href="https://github.com/Basyasoo/tropa">GitHub</a>
+      <a href="https://t.me/vpn_sus_sup">Поддержка</a>
+    </nav>
+  </footer>
+</div>
+<script src="land.js"></script>
+</body>
+</html>

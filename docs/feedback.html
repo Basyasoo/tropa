@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Обратная связь: Тропа</title>
+<meta name="description" content="Сообщайте об ошибках в Тропе и предлагайте идеи.">
+<link rel="icon" href="logo.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="bar">
+  <a class="logo" href="./"><img src="logo.png" alt="" width="30" height="30">Тропа</a>
+  <nav aria-label="Разделы">
+    <a href="./">Главная</a>
+    <a href="feedback.html" aria-current="page">Обратная связь</a>
+  </nav>
+  <a class="btn sm" href="./#get">Скачать</a>
+</header>
+
+<main class="wrap fb">
+  <div class="fb-head">
+    <div>
+      <h1>Обратная связь</h1>
+      <p>Сообщайте об ошибках и предлагайте идеи.</p>
+    </div>
+    <button class="btn" id="add" type="button">Написать</button>
+  </div>
+  <div style="padding-top:18px">
+    <div class="seg" role="group" aria-label="Раздел">
+      <button type="button" data-view="list" aria-pressed="true">Главная</button>
+      <button type="button" data-view="road" aria-pressed="false">Роадмап</button>
+    </div>
+  </div>
+
+  <div class="fb-grid" id="listView">
+    <div class="filters">
+      <div class="seg" role="group" aria-label="Тип">
+        <button type="button" data-type="" aria-pressed="true">Все</button>
+        <button type="button" data-type="bug" aria-pressed="false">Баги</button>
+        <button type="button" data-type="idea" aria-pressed="false">Идеи</button>
+      </div>
+      <label>Поиск<input id="q" type="search" autocomplete="off"></label>
+      <label>Статус<select id="status"></select></label>
+      <label>Платформа<select id="platform"></select></label>
+      <label>Сортировка<select id="sort"><option value="new">Новые</option><option value="top">Популярные</option></select></label>
+      <label class="check"><input id="closed" type="checkbox">Показать закрытые</label>
+    </div>
+    <div>
+      <div class="list" id="posts" aria-live="polite"></div>
+      <div class="pager" id="pager"></div>
+    </div>
+  </div>
+  <div class="road" id="roadView" hidden></div>
+</main>
+
+<div class="wrap">
+  <footer class="foot">
+    <span>Тропа</span>
+    <nav aria-label="Ссылки">
+      <a href="./">Главная</a>
+      <a href="https://github.com/Basyasoo/tropa">GitHub</a>
+      <a href="https://t.me/vpn_sus_sup">Поддержка</a>
+    </nav>
+  </footer>
+</div>
+
+<dialog id="newDlg">
+  <h2>Новое сообщение</h2>
+  <form id="newForm">
+    <div class="row2">
+      <label>Тип<select name="type"><option value="bug">Баг</option><option value="idea">Идея</option></select></label>
+      <label>Платформа<select name="platform" id="newPlatform"></select></label>
+    </div>
+    <label>Коротко о сути<input name="title" type="text" required minlength="5" maxlength="140"></label>
+    <label>Подробности<textarea name="body" required minlength="10" maxlength="4000" placeholder="Версия приложения, устройство, что делали и что получилось"></textarea></label>
+    <label>Имя, если хотите<input name="nick" type="text" maxlength="40" autocomplete="off"></label>
+    <input class="trap" name="site" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <p class="err" id="newErr" hidden></p>
+    <div class="acts">
+      <button class="btn ghost sm" type="button" data-close>Отмена</button>
+      <button class="btn sm" type="submit">Отправить</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="postDlg"><div id="postBody"></div></dialog>
+<script src="feedback.js"></script>
+</body>
+</html>
