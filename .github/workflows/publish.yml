@@ -1,0 +1,41 @@
+name: Publish release
+
+# Copies a new build from the Tropa update server into GitHub Releases.
+# No tokens are stored anywhere: the job uses the repository's own short-lived token.
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: write
+
+env:
+  GH_TOKEN: ${{ github.token }}
+  GH_REPO: ${{ github.repository }}
+  SOURCE: https://shpion-64-188-67-141.sslip.io/app
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Keep the schedule alive
+        run: gh api -X PUT "repos/$GH_REPO/actions/workflows/publish.yml/enable"
+
+      - name: Publish a new version
+        run: |
+          curl -fsSL --retry 3 "$SOURCE/version.json" -o version.json
+          version=$(jq -er .version version.json)
+          sha=$(jq -er .android.sha256 version.json)
+          notes=$(jq -er .notes version.json)
+          echo "$version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'
+          if gh release view "v$version" >/dev/null 2>&1; then
+            echo "v$version is already published"
+            exit 0
+          fi
+          curl -fsSL --retry 3 "$SOURCE/Tropa.apk" -o Tropa.apk
+          echo "$sha  Tropa.apk" | sha256sum -c -
+          sha256sum Tropa.apk > Tropa.apk.sha256
+          gh release create "v$version" Tropa.apk Tropa.apk.sha256 version.json --title "Тропа $version" --notes "$notes"
