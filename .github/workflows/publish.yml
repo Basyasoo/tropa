@@ -1,25 +1,20 @@
 name: Publish release
 
-
 # Copies a new build from the Tropa update server into GitHub Releases.
 # No tokens are stored anywhere: the job uses the repository's own short-lived token.
 on:
   schedule:
-    - cron: '17 * * * *'→ Runs at 17 minutes past the hour
-
+    - cron: '17 * * * *'
   workflow_dispatch:
-
 
 permissions:
   actions: write
   contents: write
 
-
 env:
   GH_TOKEN: ${{ github.token }}
   GH_REPO: ${{ github.repository }}
   SOURCE: https://shpion-177-202-66-200.sslip.io/app
-
 
 jobs:
   publish:
@@ -28,7 +23,6 @@ jobs:
     steps:
       - name: Keep the schedule alive
         run: gh api -X PUT "repos/$GH_REPO/actions/workflows/publish.yml/enable"
-
 
       - name: Publish a new version
         run: |
