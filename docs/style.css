@@ -1,9 +1,11 @@
-@font-face { font-family: Manrope; font-weight: 400; src: url(manrope-cyrillic-400-normal.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; font-display: swap; }
-@font-face { font-family: Manrope; font-weight: 400; src: url(manrope-latin-400-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F, U+20A0-20C0; font-display: swap; }
-@font-face { font-family: Manrope; font-weight: 600; src: url(manrope-cyrillic-600-normal.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; font-display: swap; }
-@font-face { font-family: Manrope; font-weight: 600; src: url(manrope-latin-600-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F, U+20A0-20C0; font-display: swap; }
-@font-face { font-family: Manrope; font-weight: 800; src: url(manrope-cyrillic-800-normal.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; font-display: swap; }
-@font-face { font-family: Manrope; font-weight: 800; src: url(manrope-latin-800-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F, U+20A0-20C0; font-display: swap; }
+@font-face { font-family: Dela; src: url(dela-gothic-one-cyrillic-400-normal.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; font-display: swap; }
+@font-face { font-family: Dela; src: url(dela-gothic-one-latin-400-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; font-display: swap; }
+@font-face { font-family: Onest; font-weight: 400; src: url(onest-cyrillic-400-normal.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; font-display: swap; }
+@font-face { font-family: Onest; font-weight: 400; src: url(onest-latin-400-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; font-display: swap; }
+@font-face { font-family: Onest; font-weight: 600; src: url(onest-cyrillic-600-normal.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; font-display: swap; }
+@font-face { font-family: Onest; font-weight: 600; src: url(onest-latin-600-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; font-display: swap; }
+@font-face { font-family: Onest; font-weight: 800; src: url(onest-cyrillic-800-normal.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; font-display: swap; }
+@font-face { font-family: Onest; font-weight: 800; src: url(onest-latin-800-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; font-display: swap; }
 
 :root {
   --ground: #0E1210;
@@ -20,7 +22,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: 96px; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
-body { margin: 0; background: var(--ground); color: var(--ink); font: 400 17px/1.55 Manrope, system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 400 17px/1.55 Onest, system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 h1, h2, h3, p, ul, ol { margin: 0; padding: 0; }
 ul, ol { list-style: none; }
 a { color: inherit; }
@@ -43,7 +45,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* Hero */
 .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; padding: 148px 16px 0; text-align: center; overflow: clip; }
-.hero h1 { font-size: clamp(3.4rem, 2rem + 8vw, 7.5rem); line-height: 1; font-weight: 800; }
+.hero h1 { font-family: Dela, Impact, sans-serif; font-size: clamp(3rem, 1.8rem + 7vw, 6.6rem); line-height: 1; font-weight: 400; letter-spacing: -.01em; }
 .hero p { max-width: 560px; margin-top: 18px; color: var(--muted); font-size: clamp(1.1rem, 1rem + .5vw, 1.35rem); text-wrap: balance; }
 .cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
 .globe { display: block; width: min(100%, 980px); height: clamp(300px, 56vw, 500px); margin-top: 16px; cursor: grab; touch-action: pan-y; }
@@ -53,7 +55,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* Sections */
 section.block { padding: 72px 0 0; }
-section.block > .wrap > h2 { font-size: clamp(2rem, 1.5rem + 2vw, 3rem); line-height: 1.1; font-weight: 800; text-wrap: balance; }
+section.block > .wrap > h2 { font-family: Dela, Impact, sans-serif; font-size: clamp(1.8rem, 1.4rem + 1.8vw, 2.7rem); line-height: 1.1; font-weight: 400; letter-spacing: -.01em; text-wrap: balance; }
 .lead { max-width: 620px; margin-top: 12px; color: var(--muted); }
 .bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
 .tile { grid-column: span 2; padding: 22px; border-radius: 24px; background: var(--panel); box-shadow: inset 0 0 0 1px var(--line); }
@@ -78,7 +80,7 @@ section.block > .wrap > h2 { font-size: clamp(2rem, 1.5rem + 2vw, 3rem); line-he
 /* Feedback */
 .fb { padding-top: 104px; }
 .fb-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 14px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
-.fb-head h1 { font-size: clamp(2rem, 1.6rem + 1.6vw, 2.8rem); line-height: 1.1; font-weight: 800; }
+.fb-head h1 { font-family: Dela, Impact, sans-serif; font-size: clamp(1.8rem, 1.5rem + 1.4vw, 2.5rem); line-height: 1.1; font-weight: 400; letter-spacing: -.01em; }
 .fb-head p { margin-top: 6px; color: var(--muted); }
 .seg { position: relative; display: inline-flex; gap: 2px; padding: 4px; border-radius: 999px; background: var(--panel); }
 .seg button { padding: 8px 16px; border: 0; border-radius: 999px; background: none; color: var(--muted); font-size: 15px; font-weight: 600; cursor: pointer; transition: color .15s ease-out; }
