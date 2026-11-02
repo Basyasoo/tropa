@@ -37,10 +37,13 @@ jobs:
             sha256sum Tropa.apk > Tropa.apk.sha256
             gh release create "v$version" Tropa.apk Tropa.apk.sha256 version.json --title "Тропа $version" --notes "$notes"
           fi
-          win=$(curl -fsSL "$SOURCE/Tropa-Windows.sha256" || true)
-          if [ -n "$win" ] && ! gh release view "v$version" --json assets -q '.assets[].name' | grep -qx Tropa-Windows.zip; then
-            curl -fsSL --retry 3 "$SOURCE/Tropa-Windows.zip" -o Tropa-Windows.zip
-            echo "$win  Tropa-Windows.zip" | sha256sum -c -
-            sha256sum Tropa-Windows.zip > Tropa-Windows.zip.sha256
-            gh release upload "v$version" Tropa-Windows.zip Tropa-Windows.zip.sha256 --clobber
+          win=$(curl -fsSL "$SOURCE/Tropa-Setup.sha256" || true)
+          have=$(gh release download "v$version" -p Tropa-Setup.exe.sha256 -O - 2>/dev/null | cut -d' ' -f1 || true)
+          if [ -n "$win" ] && [ "$win" != "$have" ]; then
+            curl -fsSL --retry 3 "$SOURCE/Tropa-Setup.exe" -o Tropa-Setup.exe
+            echo "$win  Tropa-Setup.exe" | sha256sum -c -
+            sha256sum Tropa-Setup.exe > Tropa-Setup.exe.sha256
+            gh release upload "v$version" Tropa-Setup.exe Tropa-Setup.exe.sha256 --clobber
+            gh release delete-asset "v$version" Tropa-Windows.zip -y || true
+            gh release delete-asset "v$version" Tropa-Windows.zip.sha256 -y || true
           fi
