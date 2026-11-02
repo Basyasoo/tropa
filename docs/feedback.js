@@ -1,4 +1,4 @@
-const API = 'https://tropa-64-188-67-141.sslip.io/api/fb';
+const API = 'https://tropa-177-202-66-200.sslip.io/api/fb';
 const STATUS = { open: 'Открыт', info: 'Нужны уточнения', planned: 'Запланирован', progress: 'В работе', done: 'Готово', declined: 'Отклонён', duplicate: 'Дубликат' };
 const PLATFORM = { android: 'Android', ios: 'iOS', windows: 'Windows', other: 'Другое' };
 const UP = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg>';
