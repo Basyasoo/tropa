@@ -17,7 +17,7 @@
 | Платформа | Ссылка | Обновления |
 |:----------|:-------|:-----------|
 | Android (arm64) | [Скачать APK](https://github.com/Basyasoo/tropa/releases/latest/download/Tropa.apk) | В приложении |
-| Windows | Готовится | |
+| Windows (x64) | [Скачать ZIP](https://github.com/Basyasoo/tropa/releases/latest/download/Tropa-Windows.zip) | Вручную |
 | iOS | Готовится | |
 
 ## Обновления
