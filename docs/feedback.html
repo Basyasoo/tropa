@@ -69,22 +69,29 @@
   </footer>
 </div>
 
-<dialog id="newDlg">
-  <h2>Новое сообщение</h2>
+<dialog id="newDlg" aria-labelledby="newTitle">
+  <button class="x" type="button" data-close aria-label="Закрыть">×</button>
+  <h2 id="newTitle">Новое сообщение</h2>
+  <p class="sub">Чем подробнее опишете, тем быстрее разберёмся.</p>
   <form id="newForm">
-    <div class="row2">
-      <label>Тип<select name="type"><option value="bug">Баг</option><option value="idea">Идея</option></select></label>
-      <label>Платформа<select name="platform" id="newPlatform"></select></label>
-    </div>
-    <label>Коротко о сути<input name="title" type="text" required minlength="5" maxlength="140"></label>
-    <label>Подробности<textarea name="body" required minlength="10" maxlength="4000" placeholder="Версия приложения, устройство, что делали и что получилось"></textarea></label>
-    <label id="nickRow">Имя, если хотите<input name="nick" type="text" maxlength="40" autocomplete="off"></label>
+    <fieldset class="pick">
+      <legend>Что это</legend>
+      <label><input type="radio" name="type" value="bug" checked><span>Ошибка</span></label>
+      <label><input type="radio" name="type" value="idea"><span>Идея</span></label>
+    </fieldset>
+    <fieldset class="pick">
+      <legend>Где</legend>
+      <label><input type="radio" name="platform" value="android" checked><span>Android</span></label>
+      <label><input type="radio" name="platform" value="ios"><span>iOS</span></label>
+      <label><input type="radio" name="platform" value="windows"><span>Windows</span></label>
+      <label><input type="radio" name="platform" value="other"><span>Другое</span></label>
+    </fieldset>
+    <label>Коротко о сути<input name="title" type="text" required minlength="5" maxlength="140" placeholder="Не подключается по Wi-Fi" data-count></label>
+    <label>Подробности<textarea name="body" required minlength="10" maxlength="4000" placeholder="Версия приложения, устройство, что делали и что получилось" data-count></textarea></label>
+    <label id="nickRow">Имя, если хотите<input name="nick" type="text" maxlength="40" autocomplete="off" placeholder="Можно оставить пустым"></label>
     <input class="trap" name="site" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
     <p class="err" id="newErr" hidden></p>
-    <div class="acts">
-      <button class="btn ghost sm" type="button" data-close>Отмена</button>
-      <button class="btn sm" type="submit">Отправить</button>
-    </div>
+    <button class="btn wide" type="submit">Отправить</button>
   </form>
 </dialog>
 

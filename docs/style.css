@@ -142,8 +142,8 @@ dialog .hint a { color: var(--accent); }
 dialog:focus { outline: none; }
 input[type=email] { width: 100%; padding: 10px 13px; border: 1px solid var(--line); border-radius: 13px; background: var(--panel); color: var(--ink); font-size: 16px; }
 #loginDlg { width: min(100% - 24px, 420px); }
-#loginDlg h2 { padding-right: 40px; }
-#loginDlg .x { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border: 0; border-radius: 999px; background: var(--raise); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; }
+dialog h2 { padding-right: 40px; }
+dialog .x { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border: 0; border-radius: 999px; background: var(--raise); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; }
 .login-step { display: grid; gap: 14px; margin-top: 18px; }
 .login-step[hidden] { display: none; }
 #loginDlg form.inline { display: flex; gap: 8px; margin: 0; }
@@ -155,3 +155,14 @@ input[type=email] { width: 100%; padding: 10px 13px; border: 1px solid var(--lin
 .or { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 14px; }
 .or::before, .or::after { content: ''; flex: 1; height: 1px; background: var(--line); }
 @media (max-width: 420px) { #loginDlg form.inline { flex-direction: column; } }
+#newDlg { width: min(100% - 24px, 560px); }
+.pick { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 8px; margin: 0; padding: 0; border: 0; }
+.pick legend { width: 100%; margin-bottom: 8px; padding: 0; color: var(--muted); font-size: 14px; font-weight: 600; }
+.pick label { display: block; color: var(--ink); font-size: 15px; }
+.pick input { position: absolute; opacity: 0; pointer-events: none; }
+.pick span { display: block; padding: 9px 16px; border-radius: 999px; background: var(--raise); box-shadow: inset 0 0 0 1px var(--line); font-weight: 600; cursor: pointer; transition: background-color .15s ease-out, color .15s ease-out; }
+.pick input:checked + span { background: var(--accent); color: var(--on-accent); box-shadow: none; }
+.pick input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+dialog label { position: relative; }
+.count { justify-self: end; color: var(--muted); font-size: 12px; font-weight: 400; font-variant-numeric: tabular-nums; }
+#newForm .btn.wide { margin-top: 4px; }

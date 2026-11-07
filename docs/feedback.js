@@ -171,7 +171,6 @@ function fill(select, map, first) {
 }
 fill($('status'), STATUS, 'Все');
 fill($('platform'), PLATFORM, 'Все');
-fill($('newPlatform'), PLATFORM);
 
 document.querySelectorAll('[data-type]').forEach(b => b.onclick = () => {
   document.querySelectorAll('[data-type]').forEach(o => o.setAttribute('aria-pressed', o === b));
@@ -190,6 +189,13 @@ let timer;
 $('q').oninput = () => { clearTimeout(timer); timer = setTimeout(() => { state.page = 1; load(); }, 300); };
 ['status', 'platform', 'sort', 'closed'].forEach(id => { $(id).onchange = () => { state.page = 1; load(); }; });
 $('add').onclick = () => $('newDlg').showModal();
+document.querySelectorAll('[data-count]').forEach(field => {
+  const n = el('span', 'count');
+  field.after(n);
+  const show = () => { n.textContent = `${field.value.length} / ${field.maxLength}`; };
+  field.addEventListener('input', show);
+  show();
+});
 document.querySelector('[data-close]').onclick = () => $('newDlg').close();
 $('newForm').onsubmit = async e => {
   e.preventDefault();
@@ -198,6 +204,7 @@ $('newForm').onsubmit = async e => {
   try {
     const r = await api('/posts', { method: 'POST', body: JSON.stringify(Object.fromEntries(new FormData(e.target))) });
     e.target.reset();
+    e.target.querySelectorAll('[data-count]').forEach(f => f.dispatchEvent(new Event('input')));
     $('newDlg').close();
     await load();
     open(r.id);
