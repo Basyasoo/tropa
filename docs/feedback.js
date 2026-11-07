@@ -244,6 +244,7 @@ $('login').onclick = async () => {
 };
 $('loginClose').onclick = () => $('loginDlg').close();
 $('loginDlg').onclose = () => clearInterval(polling);
+$('codeBack').onclick = () => { loginError(''); $('codeForm').hidden = true; $('loginStart').hidden = false; };
 
 $('tgLogin').onclick = async () => {
   loginError('');

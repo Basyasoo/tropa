@@ -137,8 +137,21 @@ dialog label { display: grid; gap: 4px; color: var(--muted); font-size: 14px; fo
 .fb-acts { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 .who { max-width: 180px; color: var(--muted, #A9B3AB); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .btn.wide { width: 100%; }
-dialog .sub, dialog .hint { margin-top: 6px; color: var(--muted, #A9B3AB); font-size: 15px; text-wrap: pretty; }
+dialog .sub, dialog .hint { margin-top: 6px; color: var(--muted); font-size: 15px; text-wrap: pretty; }
 dialog .hint a { color: var(--accent); }
-#loginStart, #codeForm { display: grid; gap: 12px; margin-top: 16px; }
-.or { display: flex; align-items: center; gap: 12px; color: var(--muted, #A9B3AB); font-size: 14px; }
+dialog:focus { outline: none; }
+input[type=email] { width: 100%; padding: 10px 13px; border: 1px solid var(--line); border-radius: 13px; background: var(--panel); color: var(--ink); font-size: 16px; }
+#loginDlg { width: min(100% - 24px, 420px); }
+#loginDlg h2 { padding-right: 40px; }
+#loginDlg .x { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border: 0; border-radius: 999px; background: var(--raise); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; }
+.login-step { display: grid; gap: 14px; margin-top: 18px; }
+.login-step[hidden] { display: none; }
+#loginDlg form.inline { display: flex; gap: 8px; margin: 0; }
+#loginDlg form.inline input { flex: 1; min-width: 0; min-height: 44px; }
+#loginDlg form.inline .btn { flex: none; padding-inline: 18px; }
+#loginDlg input.code { min-height: 56px; text-align: center; font-size: 26px; font-weight: 800; letter-spacing: .35em; font-variant-numeric: tabular-nums; }
+#loginDlg .link { justify-self: center; border: 0; background: none; color: var(--muted); font-size: 14px; text-decoration: underline; cursor: pointer; }
+#loginDlg .err { margin-top: 12px; }
+.or { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 14px; }
 .or::before, .or::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+@media (max-width: 420px) { #loginDlg form.inline { flex-direction: column; } }

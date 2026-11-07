@@ -90,25 +90,26 @@
 
 <dialog id="postDlg"><div id="postBody"></div></dialog>
 
-<dialog id="loginDlg">
-  <h2>Вход</h2>
+<dialog id="loginDlg" aria-labelledby="loginTitle">
+  <button class="x" type="button" id="loginClose" aria-label="Закрыть">×</button>
+  <h2 id="loginTitle">Вход</h2>
   <p class="sub">Чтобы получать ответы и видеть свои сообщения.</p>
-  <div id="loginStart">
+  <div id="loginStart" class="login-step">
     <button class="btn wide" id="tgLogin" type="button">Войти через Telegram</button>
     <p class="hint" id="tgWait" hidden>Подтвердите вход в боте, страница обновится сама. <a id="tgLink" target="_blank" rel="noopener">Открыть бота</a></p>
     <div class="or"><span>или по почте</span></div>
-    <form id="mailForm">
-      <label>Почта<input name="email" type="email" required autocomplete="email" inputmode="email"></label>
-      <button class="btn ghost sm" type="submit">Получить код</button>
+    <form id="mailForm" class="inline">
+      <input name="email" type="email" required autocomplete="email" inputmode="email" placeholder="you@mail.ru" aria-label="Почта">
+      <button class="btn ghost" type="submit">Получить код</button>
     </form>
   </div>
-  <form id="codeForm" hidden>
+  <form id="codeForm" class="login-step" hidden>
     <p class="hint" id="codeSent"></p>
-    <label>Код из письма<input name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autocomplete="one-time-code"></label>
-    <button class="btn sm" type="submit">Войти</button>
+    <input class="code" name="code" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autocomplete="one-time-code" placeholder="000000" aria-label="Код из письма">
+    <button class="btn wide" type="submit">Войти</button>
+    <button class="link" type="button" id="codeBack">Другая почта</button>
   </form>
   <p class="err" id="loginErr" hidden></p>
-  <div class="acts"><button class="btn ghost sm" type="button" id="loginClose">Закрыть</button></div>
 </dialog>
 <script src="feedback.js"></script>
 </body>
