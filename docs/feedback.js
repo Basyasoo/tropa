@@ -13,8 +13,17 @@ const voter = (() => {
   } catch { return crypto.randomUUID(); }
 })();
 
+const BRAND = new URLSearchParams(location.search).get('brand') || 'tropa';
+const store = {
+  get: () => { try { return JSON.parse(localStorage.getItem('tropa_session') || 'null'); } catch { return null; } },
+  set: v => { try { v ? localStorage.setItem('tropa_session', JSON.stringify(v)) : localStorage.removeItem('tropa_session'); } catch {} },
+};
+let session = store.get();
+
 async function api(path, options) {
-  const r = await fetch(API + path, { ...options, headers: { 'Content-Type': 'application/json', 'X-Voter': voter } });
+  const headers = { 'Content-Type': 'application/json', 'X-Voter': voter };
+  if (session) headers.Authorization = `Bearer ${session.session}`;
+  const r = await fetch(API + path, { ...options, headers });
   const data = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error(data.error || 'Сервер недоступен, попробуйте позже');
   return data;
@@ -197,4 +206,88 @@ $('newForm').onsubmit = async e => {
     err.hidden = false;
   }
 };
+
+function showUser() {
+  $('who').hidden = !session;
+  $('who').textContent = session ? session.name : '';
+  $('login').textContent = session ? 'Выйти' : 'Войти';
+  $('nickRow').hidden = !!session;
+}
+
+function signedIn(r) {
+  session = { session: r.session, name: r.name };
+  store.set(session);
+  showUser();
+  $('loginDlg').close();
+  toast(`Вы вошли как ${r.name}`);
+}
+
+function loginError(text) {
+  $('loginErr').textContent = text;
+  $('loginErr').hidden = !text;
+}
+
+let polling;
+$('login').onclick = async () => {
+  if (session) {
+    await api('/auth/logout', { method: 'POST', body: '{}' }).catch(() => {});
+    session = null;
+    store.set(null);
+    showUser();
+    return;
+  }
+  loginError('');
+  $('loginStart').hidden = false;
+  $('codeForm').hidden = true;
+  $('tgWait').hidden = true;
+  $('loginDlg').showModal();
+};
+$('loginClose').onclick = () => $('loginDlg').close();
+$('loginDlg').onclose = () => clearInterval(polling);
+
+$('tgLogin').onclick = async () => {
+  loginError('');
+  const tab = window.open('', '_blank');
+  try {
+    const { token, link } = await api('/auth/tg', { method: 'POST', body: JSON.stringify({ brand: BRAND }) });
+    if (tab) tab.location = link; else location.href = link;
+    $('tgLink').href = link;
+    $('tgWait').hidden = false;
+    clearInterval(polling);
+    polling = setInterval(async () => {
+      try {
+        const r = await api(`/auth/tg/${token}`);
+        if (r.session) { clearInterval(polling); signedIn(r); }
+      } catch (e) { clearInterval(polling); loginError(e.message); }
+    }, 2000);
+  } catch (e) { if (tab) tab.close(); loginError(e.message); }
+};
+
+let mail = '';
+$('mailForm').onsubmit = async e => {
+  e.preventDefault();
+  loginError('');
+  const btn = e.submitter;
+  btn.disabled = true;
+  mail = e.target.email.value.trim();
+  try {
+    await api('/auth/email', { method: 'POST', body: JSON.stringify({ email: mail, brand: BRAND }) });
+    $('loginStart').hidden = true;
+    $('codeForm').hidden = false;
+    $('codeSent').textContent = `Отправили код на ${mail}. Письмо может попасть в «Спам».`;
+    $('codeForm').code.focus();
+  } catch (x) { loginError(x.message); }
+  btn.disabled = false;
+};
+$('codeForm').onsubmit = async e => {
+  e.preventDefault();
+  loginError('');
+  try {
+    signedIn(await api('/auth/email/verify', { method: 'POST', body: JSON.stringify({ email: mail, code: e.target.code.value.trim() }) }));
+    e.target.reset();
+  } catch (x) { loginError(x.message); }
+};
+
+if (session) api('/auth/me').catch(() => { session = null; store.set(null); showUser(); });
+showUser();
 load();

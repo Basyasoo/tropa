@@ -133,3 +133,12 @@ dialog label { display: grid; gap: 4px; color: var(--muted); font-size: 14px; fo
   .filters > .seg { justify-self: start; }
 }
 @media (max-width: 420px) { .row2 { grid-template-columns: minmax(0, 1fr); } }
+
+.fb-acts { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.who { max-width: 180px; color: var(--muted, #A9B3AB); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.btn.wide { width: 100%; }
+dialog .sub, dialog .hint { margin-top: 6px; color: var(--muted, #A9B3AB); font-size: 15px; text-wrap: pretty; }
+dialog .hint a { color: var(--accent); }
+#loginStart, #codeForm { display: grid; gap: 12px; margin-top: 16px; }
+.or { display: flex; align-items: center; gap: 12px; color: var(--muted, #A9B3AB); font-size: 14px; }
+.or::before, .or::after { content: ''; flex: 1; height: 1px; background: var(--line); }

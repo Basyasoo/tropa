@@ -24,7 +24,11 @@
       <h1>Обратная связь</h1>
       <p>Сообщайте об ошибках и предлагайте идеи.</p>
     </div>
-    <button class="btn" id="add" type="button">Написать</button>
+    <div class="fb-acts">
+      <span class="who" id="who" hidden></span>
+      <button class="btn ghost" id="login" type="button">Войти</button>
+      <button class="btn" id="add" type="button">Написать</button>
+    </div>
   </div>
   <div style="padding-top:18px">
     <div class="seg" role="group" aria-label="Раздел">
@@ -74,7 +78,7 @@
     </div>
     <label>Коротко о сути<input name="title" type="text" required minlength="5" maxlength="140"></label>
     <label>Подробности<textarea name="body" required minlength="10" maxlength="4000" placeholder="Версия приложения, устройство, что делали и что получилось"></textarea></label>
-    <label>Имя, если хотите<input name="nick" type="text" maxlength="40" autocomplete="off"></label>
+    <label id="nickRow">Имя, если хотите<input name="nick" type="text" maxlength="40" autocomplete="off"></label>
     <input class="trap" name="site" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
     <p class="err" id="newErr" hidden></p>
     <div class="acts">
@@ -85,6 +89,27 @@
 </dialog>
 
 <dialog id="postDlg"><div id="postBody"></div></dialog>
+
+<dialog id="loginDlg">
+  <h2>Вход</h2>
+  <p class="sub">Чтобы получать ответы и видеть свои сообщения.</p>
+  <div id="loginStart">
+    <button class="btn wide" id="tgLogin" type="button">Войти через Telegram</button>
+    <p class="hint" id="tgWait" hidden>Подтвердите вход в боте, страница обновится сама. <a id="tgLink" target="_blank" rel="noopener">Открыть бота</a></p>
+    <div class="or"><span>или по почте</span></div>
+    <form id="mailForm">
+      <label>Почта<input name="email" type="email" required autocomplete="email" inputmode="email"></label>
+      <button class="btn ghost sm" type="submit">Получить код</button>
+    </form>
+  </div>
+  <form id="codeForm" hidden>
+    <p class="hint" id="codeSent"></p>
+    <label>Код из письма<input name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autocomplete="one-time-code"></label>
+    <button class="btn sm" type="submit">Войти</button>
+  </form>
+  <p class="err" id="loginErr" hidden></p>
+  <div class="acts"><button class="btn ghost sm" type="button" id="loginClose">Закрыть</button></div>
+</dialog>
 <script src="feedback.js"></script>
 </body>
 </html>
